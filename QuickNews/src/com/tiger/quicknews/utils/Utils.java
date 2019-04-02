@@ -61,7 +61,7 @@ public class Utils {
 	}
 
 	/** 
-	 * 根据手机的分辨率�?px(像素) 的单�?转成�?dp 
+	 * 根据手机的分辨率仿px(像素) 的单使转成丿dp 
 	 */
 	public static int px2dip(Context context, float pxValue) {
 		final float scale = context.getResources().getDisplayMetrics().density;
@@ -72,7 +72,7 @@ public class Utils {
 	 * 将px值转换为sp值，保证文字大小不变
 	 * 
 	 * @param pxValue
-	 * @param fontScale（DisplayMetrics类中属�?scaledDensity�?
+	 * @param fontScale（DisplayMetrics类中属scaledDensity
 	 * @return
 	 */
 	public static int px2sp(float pxValue, float fontScale) {
@@ -83,7 +83,7 @@ public class Utils {
 	 * 将sp值转换为px值，保证文字大小不变
 	 * 
 	 * @param spValue
-	 * @param fontScale（DisplayMetrics类中属�?scaledDensity�?
+	 * @param fontScale（DisplayMetrics类中属?scaledDensity?
 	 * @return
 	 */
 	public static int sp2px(float spValue, float fontScale) {
@@ -91,7 +91,7 @@ public class Utils {
 	}
 
 	/**
-	 * �?��sdcard是否可用
+	 * sdcard是否可用
 	 * @return true为可用，否则为不可用
 	 */
 	public static boolean sdCardIsAvailable() {
@@ -102,7 +102,7 @@ public class Utils {
 	}
 
 	/**
-	 * 验证手机号格式是否正�?
+	 * 验证手机号格式是否正
 	 * 
 	 * @param mobileNumber
 	 * @return
@@ -115,20 +115,20 @@ public class Utils {
 	}
 
 	/**
-	 * 验证字符�?是否适合某种格式
-	 * @param expression 正则表达�?
+	 * 验证字符是否适合某种格式
+	 * @param expression 正则表达
 	 * @param text 操作的字符串
 	 * @return
 	 */
 	private static boolean matchingText(String expression, String text) {
-		Pattern p = Pattern.compile(expression); // 正则表达�?
+		Pattern p = Pattern.compile(expression); // 正则表达
 		Matcher m = p.matcher(text); // 操作的字符串
 		boolean b = m.matches();
 		return b;
 	}
 
 	/**
-	 * �?��网络状�?
+	 * 网络状
 	 */
 	public static boolean hasNetwork(Context context) {
 		android.net.ConnectivityManager cManager = (android.net.ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -142,20 +142,20 @@ public class Utils {
 	}
 
 	/**
-	 * �?��网络状�?2
+	 * 网络状
 	 * @param context
 	 * @return
 	 */
 	public static boolean isNetworkAvailable(Context context) {
-		android.net.ConnectivityManager connectivity = (android.net.ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE); //获取系统网络连接管理�?
+		android.net.ConnectivityManager connectivity = (android.net.ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE); //获取系统网络连接管理噿
 		if (connectivity == null) { //如果网络管理器为null
 			return false; //返回false表明网络无法连接
 		}
 		else {
-			android.net.NetworkInfo[] info = connectivity.getAllNetworkInfo(); //获取�?��的网络连接对�?
-			if (info != null) { //网络信息不为null�?
+			android.net.NetworkInfo[] info = connectivity.getAllNetworkInfo(); //获取承܉的网络连接对豿
+			if (info != null) { //网络信息不为null旿
 				for (int i = 0; i < info.length; i++) { //遍历网路连接对象
-					if (info[i].isConnected()) { //当有�?��网络连接对象连接上网络时
+					if (info[i].isConnected()) { //当有丿ت网络连接对象连接上网络时
 						return true; //返回true表明网络连接正常
 					}
 				}
@@ -165,20 +165,20 @@ public class Utils {
 	}
 
 	public static boolean isMobileNetworkAvailable(Context context) {
-		//获取应用上下�?
+		//获取应用上下斿
 		ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		//获取系统的连接服�?
+		//获取系统的连接服势
 		NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
-		//获取网络的连接情�?
+		//获取网络的连接情冿
 		if (activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
-			//判断3G�?
+			//判断3G罿
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * 版本�?
+	 * 版本叿
 	 * @param context
 	 * @return
 	 */
@@ -198,7 +198,7 @@ public class Utils {
 	}
 
 	/**
-	 * 渠道�?
+	 * 渠道叿
 	 * @param context
 	 * @param metaName
 	 * @return
@@ -250,7 +250,7 @@ public class Utils {
 	}
 
 	/**
-	 * 判断字符串是否是合法�?6进制�?
+	 * 判断字符串是否是合法皿6进制丿
 	 * @author: Xue Wenchao
 	 * @param str
 	 * @return
@@ -292,7 +292,7 @@ public class Utils {
 	}
 
 	/**
-	 * 显示软键�?
+	 * 显示软键盿
 	 */
 	public static void showSoftInput(Context context) {
 		InputMethodManager inputMeMana = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -300,7 +300,7 @@ public class Utils {
 	}
 
 	/**
-	 * 判断字符串是否为�?
+	 * 判断字符串是否为穿
 	 * @param str
 	 * @return
 	 */
@@ -379,8 +379,8 @@ public class Utils {
 		java.util.regex.Pattern p_html1;
 		java.util.regex.Matcher m_html1;
 		try {
-			String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // 定义script的正则表达式{�?script[^>]*?>[\\s\\S]*?<\\/script>    
-			String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; // 定义style的正则表达式{�?style[^>]*?>[\\s\\S]*?<\\/style>    
+			String regEx_script = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>"; // 定义script的正则表达式{房script[^>]*?>[\\s\\S]*?<\\/script>    
+			String regEx_style = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>"; // 定义style的正则表达式{房style[^>]*?>[\\s\\S]*?<\\/style>    
 			String regEx_html = "<[^>]+>"; // 定义HTML标签的正则表达式    
 			String regEx_html1 = "<[^>]+";
 			p_script = Pattern.compile(regEx_script, Pattern.CASE_INSENSITIVE);
@@ -406,11 +406,11 @@ public class Utils {
 			System.err.println("Html2Text: " + e.getMessage());
 		}
 
-		return textStr;// 返回文本字符�?   
+		return textStr;// 返回文本字符丿   
 	}
 
 	/**
-	 * 写图片到SD�?
+	 * 写图片到SD卿
 	 * @param bitmap
 	 * @param filename
 	 * @param url
@@ -435,7 +435,7 @@ public class Utils {
 	}
 
 	/**
-	 * 从网络下载图片并保存到指定路�?
+	 * 从网络下载图片并保存到指定路徿
 	 * @param imgUrl
 	 * @param filePath
 	 */
@@ -467,7 +467,7 @@ public class Utils {
 	}
 
 	/**
-	 * 拷贝�?
+	 * 拷贝浿
 	 * @param is
 	 * @param os
 	 */

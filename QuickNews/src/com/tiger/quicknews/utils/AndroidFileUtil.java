@@ -16,7 +16,7 @@ public class AndroidFileUtil {
         // File file = new File(filePath);
         // if (!file.exists())
         // return null;
-        /* 取得扩展�? */
+        /* 取得扩展*/
         String end = filePath
                 .substring(filePath.lastIndexOf(".") + 1, filePath.length())
                 .toLowerCase();
@@ -63,7 +63,7 @@ public class AndroidFileUtil {
     // }
 
     /**
-     * Android获取�?��用于打开APK文件的intent
+     * Android获取用于打开APK文件的intent
      */
     public static Intent getAllIntent(String param) {
 
@@ -76,7 +76,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开APK文件的intent
+     * Android获取用于打开APK文件的intent
      */
     public static Intent getApkFileIntent(String param) {
 
@@ -89,7 +89,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开VIDEO文件的intent
+     * Android获取用于打开VIDEO文件的intent
      */
     public static Intent getVideoFileIntent(String param) {
 
@@ -103,7 +103,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开AUDIO文件的intent
+     * Android获取用于打开AUDIO文件的intent
      */
     public static Intent getAudioFileIntent(String param) {
 
@@ -117,7 +117,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开Html文件的intent
+     * Android获取用于打开Html文件的intent
      */
     public static Intent getHtmlFileIntent(String param) {
 
@@ -129,7 +129,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开图片文件的intent
+     * Android获取用于打开图片文件的intent
      */
     public static Intent getImageFileIntent(String param) {
 
@@ -142,7 +142,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开PPT文件的intent
+     * Android获取用于打开PPT文件的intent
      */
     public static Intent getPptFileIntent(String param) {
 
@@ -155,7 +155,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开Excel文件的intent
+     * Android获取用于打开Excel文件的intent
      */
     public static Intent getExcelFileIntent(String param) {
 
@@ -168,7 +168,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开Word文件的intent
+     * Android获取用于打开Word文件的intent
      */
     public static Intent getWordFileIntent(String param) {
 
@@ -181,7 +181,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开CHM文件的intent
+     * Android获取用于打开CHM文件的intent
      */
     public static Intent getChmFileIntent(String param) {
 
@@ -194,7 +194,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开文本文件的intent
+     * Android获取用于打开文本文件的intent
      */
     public static Intent getTextFileIntent(String param, boolean paramBoolean) {
 
@@ -212,7 +212,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开PDF文件的intent
+     * Android获取用于打开PDF文件的intent
      */
     public static Intent getPdfFileIntent(String param) {
 
@@ -225,7 +225,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开ZIP文件的intent
+     * Android获取用于打开ZIP文件的intent
      */
     public static Intent getZipFileIntent(String param) {
 
@@ -238,7 +238,7 @@ public class AndroidFileUtil {
     }
 
     /**
-     * Android获取�?��用于打开ZIP文件的intent
+     * Android获取用于打开ZIP文件的intent
      */
     public static Intent getRarFileIntent(String param) {
 

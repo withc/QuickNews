@@ -14,12 +14,12 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * µ÷ÊÔÈÕÖ¾µÄÍ³Ò»Êä³ö
+ * è°ƒè¯•æ—¥å¿—çš„ç»Ÿä¸€è¾“å‡º
  * 
  * @author Xue Wenchao
  */
 public class LogUtils {
-    // ÊÇ·ñÊä³öÈÕÖ¾µÄ¿ª¹Ø
+    // æ˜¯å¦è¾“å‡ºæ—¥å¿—çš„å¼€å…³
     public static boolean DEBUG = true;
 
     public static void i(String TAG, String msg) {
@@ -125,7 +125,7 @@ public class LogUtils {
     }
 
     /**
-     * ÉèÖÃÈÕÖ¾µÄ´æ·ÅÂ·¾¶
+     * è®¾ç½®æ—¥å¿—çš„å­˜æ”¾è·¯å¾„
      * 
      * @param fileLogPath
      */
@@ -135,7 +135,7 @@ public class LogUtils {
 
     private static class FileLogger implements Runnable {
         private static FileLogger inst = new FileLogger();
-        private String logPath;// ÈÕÖ¾´æ·ÅµÄÂ·¾¶
+        private String logPath;// æ—¥å¿—å­˜æ”¾çš„è·¯å¾„
 
         private final ArrayList<String> logList = new ArrayList<String>();
 
@@ -278,7 +278,7 @@ public class LogUtils {
                     }
                     fos = new FileOutputStream(file, true);
                     writer = new BufferedWriter(new OutputStreamWriter(fos));
-                    // Ğ´ÎÄ¼ş
+                    // å†™æ–‡ä»¶
                     writer.write(log);
                     writer.newLine();
                 } catch (Throwable e) {
