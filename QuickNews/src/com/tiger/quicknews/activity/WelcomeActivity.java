@@ -46,8 +46,9 @@ public class WelcomeActivity extends BaseActivity {
             setCacheStr("welcome", "welcome");
             MainActivity_.intent(this).start();
         }
-        defaultFinishNotActivityHelper();
+
         setCacheStr("MoreActivity", "");
+        defaultFinishNotActivityHelper();
     }
 
     @Override

@@ -194,7 +194,11 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         String result;
         try {
             result = HttpUtil.getByHttpClient(getActivity(), url);
-            getResult(result);
+            if (!StringUtils.isEmpty(result)) {
+                getResult(result);
+            } else {
+                swipeLayout.setRefreshing(false);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,7 +217,7 @@ public class NewsFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         List<NewModle> list =
                 NewListJson.instance(getActivity()).readJsonNewModles(result,
                         Url.TopId);
-        if (index == 0) {
+        if (index == 0 && list.size() >= 4) {
             initSliderLayout(list);
         } else {
             newAdapter.appendList(list);

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.os.Build;
-import android.support.v4.view.KeyEventCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.VelocityTrackerCompat;
 import android.support.v4.view.ViewCompat;
@@ -311,7 +310,7 @@ public class CustomViewAbove extends ViewGroup {
     float distanceInfluenceForSnapDuration(float f) {
         f -= 0.5f; // center the values about 0.
         f *= 0.3f * Math.PI / 2.0f;
-        return FloatMath.sin(f);
+        return (float)Math.sin(f);
     }
 
     public int getDestScrollX(int page) {
@@ -972,9 +971,9 @@ public class CustomViewAbove extends ViewGroup {
                         // FOCUS_BACKWARD
                         // before Android 3.0. Ignore the tab key on those
                         // devices.
-                        if (KeyEventCompat.hasNoModifiers(event)) {
+                        if (event.hasNoModifiers()) {
                             handled = arrowScroll(FOCUS_FORWARD);
-                        } else if (KeyEventCompat.hasModifiers(event, KeyEvent.META_SHIFT_ON)) {
+                        } else if (event.hasModifiers( KeyEvent.META_SHIFT_ON)) {
                             handled = arrowScroll(FOCUS_BACKWARD);
                         }
                     }

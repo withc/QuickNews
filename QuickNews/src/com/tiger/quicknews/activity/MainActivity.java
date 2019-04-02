@@ -32,8 +32,10 @@ import com.umeng.update.UmengUpdateAgent;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -71,7 +73,7 @@ public class MainActivity extends BaseActivity {
     @ViewById(R.id.top_more)
     protected ImageView top_more;
     /** 用户选择的新闻分类列表 */
-    private ArrayList<ChannelItem> userChannelList;
+    protected static ArrayList<ChannelItem> userChannelLists;
     /** 请求CODE */
     public final static int CHANNELREQUEST = 1;
     /** 调整返回的RESULTCODE */
@@ -104,7 +106,7 @@ public class MainActivity extends BaseActivity {
         MobclickAgent.updateOnlineConfig(this);
         mScreenWidth = BaseTools.getWindowsWidth(this);
         mItemWidth = mScreenWidth / 7;// 一个Item宽度为屏幕的1/7
-        userChannelList = new ArrayList<ChannelItem>();
+        userChannelLists = new ArrayList<ChannelItem>();
         fragments = new ArrayList<Fragment>();
     }
 
@@ -152,7 +154,7 @@ public class MainActivity extends BaseActivity {
 
     @Click(R.id.button_more_columns)
     protected void onMoreColumns(View view) {
-        openActivityForResult(ChannelActivity.class, CHANNELREQUEST);
+        openActivityForResult(ChannelActivity_.class, CHANNELREQUEST);
     }
 
     /**
@@ -160,14 +162,15 @@ public class MainActivity extends BaseActivity {
      */
     public void setChangelView() {
         initColumnData();
-        initTabColumn();
-        initFragment();
+
     }
 
     /** 获取Column栏目 数据 */
     private void initColumnData() {
-        userChannelList = ((ArrayList<ChannelItem>) ChannelManage.getManage(
+        userChannelLists = ((ArrayList<ChannelItem>) ChannelManage.getManage(
                 App.getApp().getSQLHelper()).getUserChannel());
+        initTabColumn();
+        initFragment();
     }
 
     /**
@@ -175,7 +178,7 @@ public class MainActivity extends BaseActivity {
      */
     private void initTabColumn() {
         mRadioGroup_content.removeAllViews();
-        int count = userChannelList.size();
+        int count = userChannelLists.size();
         mColumnHorizontalScrollView.setParam(this, mScreenWidth, mRadioGroup_content, shade_left,
                 shade_right, ll_more_columns, rl_column);
         for (int i = 0; i < count; i++) {
@@ -192,7 +195,7 @@ public class MainActivity extends BaseActivity {
             columnTextView.setGravity(Gravity.CENTER);
             columnTextView.setPadding(5, 5, 5, 5);
             columnTextView.setId(i);
-            columnTextView.setText(userChannelList.get(i).getName());
+            columnTextView.setText(userChannelLists.get(i).getName());
             columnTextView.setTextColor(getResources().getColorStateList(
                     R.color.top_category_scroll_text_color_day));
             if (columnSelectIndex == i) {
@@ -222,10 +225,10 @@ public class MainActivity extends BaseActivity {
      */
     private void initFragment() {
         fragments.clear();
-        int count = userChannelList.size();
+        int count = userChannelLists.size();
         for (int i = 0; i < count; i++) {
             // Bundle data = new Bundle();
-            String nameString = userChannelList.get(i).getName();
+            String nameString = userChannelLists.get(i).getName();
             // data.putString("text", nameString);
             // data.putInt("id", userChannelList.get(i).getId());
             // initFragment(nameString);
@@ -378,16 +381,21 @@ public class MainActivity extends BaseActivity {
         if (side_drawer.isMenuShowing()) {
             side_drawer.showContent();
         } else {
-            if (back_pressed + 3000 > System.currentTimeMillis()) {
-                finish();
-                super.onBackPressed();
-            }
-            else
-                showCustomToast(getString(R.string.press_again_exit));
-            // Toast.makeText(this, getString(R.string.press_again_exit),
-            // 1).show();
+            System.out.println(isShow());
+            if (isShow()) {
+                dismissProgressDialog();
+            } else {
+                if (back_pressed + 3000 > System.currentTimeMillis()) {
+                    finish();
+                    super.onBackPressed();
+                }
+                else
+                    showCustomToast(getString(R.string.press_again_exit));
+                // Toast.makeText(this, getString(R.string.press_again_exit),
+                // 1).show();
 
-            back_pressed = System.currentTimeMillis();
+                back_pressed = System.currentTimeMillis();
+            }
         }
     }
 

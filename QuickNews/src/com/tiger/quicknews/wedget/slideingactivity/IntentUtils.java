@@ -5,15 +5,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 
 import com.tiger.quicknews.activity.BaseActivity;
+import com.tiger.quicknews.utils.BMapUtil;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.SoftReference;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -23,6 +28,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class IntentUtils {
     public static String KEY_PREVIEW_IMAGE = "preview_image";
+    static ByteArrayOutputStream baos = null;
+    static Bitmap bitmap = null;
 
     /**
      * start screen capture with no delay
@@ -67,24 +74,27 @@ public class IntentUtils {
                  */
                 final View contentView = ((Activity) context).findViewById(android.R.id.content);
 
-                ByteArrayOutputStream baos = null;
-                Bitmap bitmap = null;
-
                 try {
                     bitmap = Bitmap.createBitmap(contentView.getWidth(),
-                            contentView.getHeight(), Bitmap.Config.ARGB_8888);
+                            contentView.getHeight(), Bitmap.Config.ARGB_4444);
+                    // bitmap = BMapUtil.getBitmapFromViews(contentView);
                     contentView.draw(new Canvas(bitmap));
 
                     baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
                     intent.putExtra(KEY_PREVIEW_IMAGE, baos.toByteArray());
-                } finally {
+
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+                finally {
                     try {
                         /** no need to close, actually do nothing */
                         if (null != baos)
                             baos.close();
                         if (null != bitmap && !bitmap.isRecycled()) {
-                            bitmap.recycle();
+                            // bitmap.recycle();
                             bitmap = null;
                         }
                     } catch (IOException e) {
@@ -99,7 +109,11 @@ public class IntentUtils {
             ScheduledExecutorService worker = Executors.newSingleThreadScheduledExecutor();
             worker.schedule(action, delay, TimeUnit.MILLISECONDS);
         } else {
-            action.run();
+            try {
+                action.run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

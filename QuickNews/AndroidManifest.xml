@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tiger.quicknews"
-    android:versionCode="6"
-    android:versionName="1.32" >
+    android:versionCode="8"
+    android:versionName="1.4" >
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -46,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.MainActivity_" />
-        <activity android:name=".activity.ChannelActivity" />
+        <activity android:name=".activity.ChannelActivity_" />
         <activity android:name=".activity.DetailsActivity_" 
             android:theme="@style/SlideAppTheme"/>
         <activity android:name=".activity.ImageDetailActivity_" />

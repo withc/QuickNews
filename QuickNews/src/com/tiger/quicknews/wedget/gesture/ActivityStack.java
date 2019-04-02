@@ -6,7 +6,7 @@ import java.util.List;
 import android.app.Activity;
 
 /**
- * activity运行栈，用于完全�?��程序
+ * activity运行栈，用于完全程序
  * 
  * @author Xue Wenchao
  *

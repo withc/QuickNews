@@ -25,7 +25,7 @@ public class SlidingMenuView {
     }
 
     public SlidingMenu initSlidingMenuView(Activity activity, View view) {
-        // ²Ëµ¥´ò¿ªÊ±µÄ¶¯»­
+        // èœå•æ‰“å¼€æ—¶çš„åŠ¨ç”»
         mTransformer = new CanvasTransformer() {
             @Override
             public void transformCanvas(Canvas canvas, float percentOpen) {
@@ -34,64 +34,64 @@ public class SlidingMenuView {
             }
         };
         slidingMenu = new SlidingMenu(activity);
-        slidingMenu.setMode(SlidingMenu.LEFT);// ÉèÖÃ×óÓÒ»¬²Ëµ¥
-        slidingMenu.setTouchModeAbove(SlidingMenu.SLIDING_WINDOW);// ÉèÖÃÒªÊ¹²Ëµ¥»¬¶¯£¬´¥ÅöÆÁÄ»µÄ·¶Î§
-        // slidingMenuView.setTouchModeBehind(SlidingMenu.SLIDING_CONTENT);//ÉèÖÃÁËÕâ¸ö»á»ñÈ¡²»µ½²Ëµ¥ÀïÃæµÄ½¹µã£¬ËùÒÔÏÈ×¢ÊÍµô
-        slidingMenu.setShadowWidthRes(R.dimen.shadow_width);// ÉèÖÃÒõÓ°Í¼Æ¬µÄ¿í¶È
-        slidingMenu.setShadowDrawable(R.drawable.shadow);// ÉèÖÃÒõÓ°Í¼Æ¬
-        slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);// SlidingMenu»®³öÊ±Ö÷Ò³ÃæÏÔÊ¾µÄÊ£Óà¿í¶È
-        slidingMenu.setFadeDegree(0.35F);// SlidingMenu»¬¶¯Ê±µÄ½¥±ä³Ì¶È
-        slidingMenu.attachToActivity(activity, SlidingMenu.SLIDING_WINDOW);// Ê¹SlidingMenu¸½¼ÓÔÚActivityÓÒ±ß
-        // slidingMenuView.setBehindWidthRes(R.dimen.left_drawer_avatar_size);//ÉèÖÃSlidingMenu²Ëµ¥µÄ¿í¶È
-        slidingMenu.setMenu(view);// ÉèÖÃmenuµÄ²¼¾ÖÎÄ¼ş
-        // localSlidingMenu.toggle();//¶¯Ì¬ÅĞ¶Ï×Ô¶¯¹Ø±Õ»ò¿ªÆôSlidingMenu
+        slidingMenu.setMode(SlidingMenu.LEFT);// è®¾ç½®å·¦å³æ»‘èœå•
+        slidingMenu.setTouchModeAbove(SlidingMenu.SLIDING_WINDOW);// è®¾ç½®è¦ä½¿èœå•æ»‘åŠ¨ï¼Œè§¦ç¢°å±å¹•çš„èŒƒå›´
+        // slidingMenuView.setTouchModeBehind(SlidingMenu.SLIDING_CONTENT);//è®¾ç½®äº†è¿™ä¸ªä¼šè·å–ä¸åˆ°èœå•é‡Œé¢çš„ç„¦ç‚¹ï¼Œæ‰€ä»¥å…ˆæ³¨é‡Šæ‰
+        slidingMenu.setShadowWidthRes(R.dimen.shadow_width);// è®¾ç½®é˜´å½±å›¾ç‰‡çš„å®½åº¦
+        slidingMenu.setShadowDrawable(R.drawable.shadow);// è®¾ç½®é˜´å½±å›¾ç‰‡
+        slidingMenu.setBehindOffsetRes(R.dimen.slidingmenu_offset);// SlidingMenuåˆ’å‡ºæ—¶ä¸»é¡µé¢æ˜¾ç¤ºçš„å‰©ä½™å®½åº¦
+        slidingMenu.setFadeDegree(0.35F);// SlidingMenuæ»‘åŠ¨æ—¶çš„æ¸å˜ç¨‹åº¦
+        slidingMenu.attachToActivity(activity, SlidingMenu.SLIDING_WINDOW);// ä½¿SlidingMenué™„åŠ åœ¨Activityå³è¾¹
+        // slidingMenuView.setBehindWidthRes(R.dimen.left_drawer_avatar_size);//è®¾ç½®SlidingMenuèœå•çš„å®½åº¦
+        slidingMenu.setMenu(view);// è®¾ç½®menuçš„å¸ƒå±€æ–‡ä»¶
+        // localSlidingMenu.toggle();//åŠ¨æ€åˆ¤æ–­è‡ªåŠ¨å…³é—­æˆ–å¼€å¯SlidingMenu
         // slidingMenu.setSecondaryMenu(R.layout.activity_main);
         // slidingMenu.setSecondaryShadowDrawable(R.drawable.shadowright);
-        // ÉèÖÃ²Ëµ¥´ò¿ª¶¯»­
+        // è®¾ç½®èœå•æ‰“å¼€åŠ¨ç”»
         // slidingMenu.setBehindCanvasTransformer(mTransformer);
         return slidingMenu;
     }
 
     public void setWeatherImage(ImageView mWeatherImage, String weather) {
-        if (weather.equals("¶àÔÆ") || weather.equals("¶àÔÆ×ªÒõ") || weather.equals("¶àÔÆ×ªÇç")) {
+        if (weather.equals("å¤šäº‘") || weather.equals("å¤šäº‘è½¬é˜´") || weather.equals("å¤šäº‘è½¬æ™´")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_duoyun);
-        } else if (weather.equals("ÖĞÓê") || weather.equals("ÖĞµ½´óÓê")) {
+        } else if (weather.equals("ä¸­é›¨") || weather.equals("ä¸­åˆ°å¤§é›¨")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_zhongyu);
-        } else if (weather.equals("À×ÕóÓê")) {
+        } else if (weather.equals("é›·é˜µé›¨")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_leizhenyu);
-        } else if (weather.equals("ÕóÓê") || weather.equals("ÕóÓê×ª¶àÔÆ")) {
+        } else if (weather.equals("é˜µé›¨") || weather.equals("é˜µé›¨è½¬å¤šäº‘")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_zhenyu);
-        } else if (weather.equals("±©Ñ©")) {
+        } else if (weather.equals("æš´é›ª")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_baoxue);
-        } else if (weather.equals("±©Óê")) {
+        } else if (weather.equals("æš´é›¨")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_baoyu);
-        } else if (weather.equals("´ó±©Óê")) {
+        } else if (weather.equals("å¤§æš´é›¨")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_dabaoyu);
-        } else if (weather.equals("´óÑ©")) {
+        } else if (weather.equals("å¤§é›ª")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_daxue);
-        } else if (weather.equals("´óÓê") || weather.equals("´óÓê×ªÖĞÓê")) {
+        } else if (weather.equals("å¤§é›¨") || weather.equals("å¤§é›¨è½¬ä¸­é›¨")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_dayu);
-        } else if (weather.equals("À×ÕóÓê±ù±¢")) {
+        } else if (weather.equals("é›·é˜µé›¨å†°é›¹")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_leizhenyubingbao);
-        } else if (weather.equals("Çç")) {
+        } else if (weather.equals("æ™´")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_qing);
-        } else if (weather.equals("É³³¾±©")) {
+        } else if (weather.equals("æ²™å°˜æš´")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_shachenbao);
-        } else if (weather.equals("ÌØ´ó±©Óê")) {
+        } else if (weather.equals("ç‰¹å¤§æš´é›¨")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_tedabaoyu);
-        } else if (weather.equals("Îí") || weather.equals("Îíö²")) {
+        } else if (weather.equals("é›¾") || weather.equals("é›¾éœ¾")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_wu);
-        } else if (weather.equals("Ğ¡Ñ©")) {
+        } else if (weather.equals("å°é›ª")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_xiaoxue);
-        } else if (weather.equals("Ğ¡Óê")) {
+        } else if (weather.equals("å°é›¨")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_xiaoyu);
-        } else if (weather.equals("Òõ")) {
+        } else if (weather.equals("é˜´")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_yin);
-        } else if (weather.equals("Óê¼ĞÑ©")) {
+        } else if (weather.equals("é›¨å¤¹é›ª")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_yujiaxue);
-        } else if (weather.equals("ÕóÑ©")) {
+        } else if (weather.equals("é˜µé›ª")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_zhenxue);
-        } else if (weather.equals("ÖĞÑ©")) {
+        } else if (weather.equals("ä¸­é›ª")) {
             mWeatherImage.setImageResource(R.drawable.biz_plugin_weather_zhongxue);
         }
     }

@@ -6,11 +6,26 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import org.apache.http.NameValuePair;
+import com.squareup.okhttp.Cache;
+import com.squareup.okhttp.CacheControl;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.MediaType;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+import com.squareup.okhttp.internal.DiskLruCache;
+import com.squareup.okhttp.internal.Util;
+import com.squareup.okhttp.internal.io.FileSystem;
+
+import java.util.concurrent.TimeUnit;
 
 import java.io.UnsupportedEncodingException;
 
 public class HttpUtil {
     // 网络连接部分
+
+    public  static final OkHttpClient mOkHttpClient = new OkHttpClient();
 
     public static String postByHttpURLConnection(String strUrl,
             NameValuePair... nameValuePairs) {
@@ -32,10 +47,18 @@ public class HttpUtil {
 
     public static String getByHttpClient(Context context, String strUrl,
             NameValuePair... nameValuePairs) throws Exception {
-        String result = CustomHttpClient.getFromWebByHttpClient(context, strUrl, nameValuePairs);
 
-        if (TextUtils.isEmpty(result)) {
-            result = "";
+        mOkHttpClient.setConnectTimeout(1000, TimeUnit.MINUTES);
+        mOkHttpClient.setReadTimeout(1000, TimeUnit.MINUTES);
+        Request request = new Request.Builder()
+                .url(strUrl)
+                .build();
+        Response response = mOkHttpClient.newCall(request).execute();
+
+        String result = "";
+        if (response.isSuccessful())
+        {
+            result = response.body().string();
         }
 
         return result;

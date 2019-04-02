@@ -2,9 +2,9 @@ package com.tiger.quicknews.wedget.city;
 
 public interface ContactItemInterface
 {
-	// ¸ù¾İ¸Ã×Ö¶ÎÀ´ÅÅĞò
+	// æ ¹æ®è¯¥å­—æ®µæ¥æ’åº
 	public String getItemForIndex();
 
-	// ¸Ã×Ö¶ÎÓÃÀ´ÏÔÊ¾³öÀ´
+	// è¯¥å­—æ®µç”¨æ¥æ˜¾ç¤ºå‡ºæ¥
 	public String getDisplayInfo();
 }

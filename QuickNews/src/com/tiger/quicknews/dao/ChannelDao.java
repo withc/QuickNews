@@ -5,13 +5,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
 import com.tiger.quicknews.bean.ChannelItem;
 import com.tiger.quicknews.db.SQLHelper;
-
-import org.jsoup.select.Evaluator.Class;
-
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -109,8 +104,10 @@ public class ChannelDao implements ChannelDaoInface {
             flag = (count > 0 ? true : false);
             database.setTransactionSuccessful();
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (database != null) {
+                database.endTransaction();
                 database.close();
             }
         }
@@ -125,9 +122,13 @@ public class ChannelDao implements ChannelDaoInface {
         int count = 0;
         try {
             database = helper.getWritableDatabase();
-            count = database.update(SQLHelper.TABLE_CHANNEL, values, whereClause, whereArgs);
+            // count = database.update(SQLHelper.TABLE_CHANNEL, values,
+            // whereClause, whereArgs);
+            database.execSQL("update " + SQLHelper.TABLE_CHANNEL + " set selected = "
+                    + values.getAsString("selected") + " where id = " + values.getAsString("id"));
             flag = (count > 0 ? true : false);
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (database != null) {
                 database.endTransaction();
@@ -140,7 +141,6 @@ public class ChannelDao implements ChannelDaoInface {
     @Override
     public Map<String, String> viewCache(String selection,
             String[] selectionArgs) {
-        // TODO Auto-generated method stub
         SQLiteDatabase database = null;
         Cursor cursor = null;
         Map<String, String> map = new HashMap<String, String>();
@@ -163,6 +163,7 @@ public class ChannelDao implements ChannelDaoInface {
             }
             database.setTransactionSuccessful();
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (database != null) {
                 database.endTransaction();
@@ -201,6 +202,7 @@ public class ChannelDao implements ChannelDaoInface {
 
             database.setTransactionSuccessful();
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (database != null) {
                 database.endTransaction();

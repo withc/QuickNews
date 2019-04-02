@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.tiger.quicknews.R;
+import com.tiger.quicknews.utils.InputStreamUtil;
 import com.tiger.quicknews.utils.LogUtils;
 
 import org.apache.http.HttpEntity;
@@ -32,8 +33,11 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,7 +139,6 @@ public class CustomHttpClient {
                     R.string.httpError));
         }
         cookieStore = httpclient.getCookieStore();
-
         return EntityUtils.toString(httpResponse.getEntity());
 
     }

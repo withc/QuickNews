@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Xml.Encoding;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,11 +18,17 @@ import com.tiger.quicknews.http.Url;
 import com.tiger.quicknews.listener.BackGestureListener;
 import com.tiger.quicknews.utils.ACache;
 import com.tiger.quicknews.utils.DialogUtil;
+import com.tiger.quicknews.utils.StringUtils;
 import com.tiger.quicknews.wedget.crouton.Crouton;
 import com.tiger.quicknews.wedget.crouton.Style;
 import com.tiger.quicknews.wedget.gesture.BaseActivityHelper;
 import com.tiger.quicknews.wedget.slideingactivity.IntentUtils;
 import com.tiger.quicknews.wedget.slideingactivity.SlidingActivity;
+
+import org.apache.http.util.EncodingUtils;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class BaseActivity extends SlidingActivity {
 
@@ -64,8 +71,9 @@ public class BaseActivity extends SlidingActivity {
         return urlString;
     }
 
-    public String getWeatherUrl(String cityName) {
-        String urlString = Url.WeatherHost + cityName + Url.WeatherKey;
+    public String getWeatherUrl(String cityName) throws UnsupportedEncodingException {
+        // + Url.WeatherKey
+        String urlString = Url.WeatherHost + URLEncoder.encode(cityName, "utf-8");
         return urlString;
     }
 
@@ -136,6 +144,21 @@ public class BaseActivity extends SlidingActivity {
     }
 
     /**
+     * dialog是否显示
+     */
+    public boolean isShow() {
+        try {
+
+            if (progressDialog != null && progressDialog.isShowing()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
      * 更具类打开acitvity
      */
     public void openActivity(Class<?> pClass) {
@@ -171,6 +194,7 @@ public class BaseActivity extends SlidingActivity {
      * @return
      */
     public boolean hasNetWork() {
+
         return HttpUtil.isNetworkAvailable(this);
     }
 
@@ -196,7 +220,9 @@ public class BaseActivity extends SlidingActivity {
      * 设置缓存数据（key,value）
      */
     public void setCacheStr(String key, String value) {
-        ACache.get(this).put(key, value);
+        if (!StringUtils.isEmpty(value)) {
+            ACache.get(this).put(key, value);
+        }
     }
 
     /**

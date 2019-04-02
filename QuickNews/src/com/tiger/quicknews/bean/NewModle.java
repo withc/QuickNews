@@ -13,23 +13,23 @@ public class NewModle extends BaseModle {
      */
     private String docid;
     /**
-     * ±êÌâ
+     * æ ‡é¢˜
      */
     private String title;
     /**
-     * Ğ¡ÄÚÈİ
+     * å°å†…å®¹
      */
     private String digest;
     /**
-     * Í¼Æ¬µØÖ·
+     * å›¾ç‰‡åœ°å€
      */
     private String imgsrc;
     /**
-     * À´Ô´
+     * æ¥æº
      */
     private String source;
     /**
-     * Ê±¼ä
+     * æ—¶é—´
      */
     private String ptime;
     /**
@@ -37,7 +37,7 @@ public class NewModle extends BaseModle {
      */
     private String tag;
     /**
-     * ÁĞ±í
+     * åˆ—è¡¨
      */
     private ImagesModle imagesModle;
 
@@ -58,7 +58,7 @@ public class NewModle extends BaseModle {
     }
 
     /**
-     * Í·²¿ÁĞ±í
+     * å¤´éƒ¨åˆ—è¡¨
      */
     private List<ImagesModle> imgHeadLists;
 

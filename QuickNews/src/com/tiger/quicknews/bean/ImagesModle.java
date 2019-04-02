@@ -17,7 +17,7 @@ public class ImagesModle extends BaseModle {
      */
     private String title;
     /**
-     * ͼƬ��
+     * 图片集
      */
     private List<String> imgList;
 

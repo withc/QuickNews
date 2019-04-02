@@ -30,7 +30,7 @@ public class SlideActivityHelper {
         gesturellView.setGestureViewGroupGoneListener(new GestureViewGroupGoneListener() {
             @Override
             public void onFinish() {
-                activity.finish(); // 界面滑动消失后，�?�� Activity�?
+                activity.finish(); // 界面滑动消失后， Activity
             }
         });
 
@@ -40,7 +40,7 @@ public class SlideActivityHelper {
         FrameLayout decorView = (FrameLayout) activity.getWindow().getDecorView();
         View decorView_child = decorView.getChildAt(0);
 
-        // 使用 GestureViewGroup 封装 DecorView 中的内容�?
+        // 使用 GestureViewGroup 封装 DecorView 中的内容
         if (!(decorView_child instanceof GestureViewGroup)) {
             decorView.removeAllViews();
             decorView_child.setBackgroundResource(R.drawable.window_background);

@@ -37,7 +37,7 @@ public class NewDetailModle extends BaseModle {
      */
     private String url_mp4;
     /**
-     * ͼƬ�б�
+     * 图片列表
      */
     private List<String> imgList;
 

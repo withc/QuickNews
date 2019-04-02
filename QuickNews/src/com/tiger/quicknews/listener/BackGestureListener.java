@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import com.tiger.quicknews.activity.BaseActivity;
 
 /**
- * 返回手势监听接口
+ * 杩斿洖鎵嬪娍鐩戝惉鎺ュ彛
  */
 public class BackGestureListener implements OnGestureListener {
     Activity activity;

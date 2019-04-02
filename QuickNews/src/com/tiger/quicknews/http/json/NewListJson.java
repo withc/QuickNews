@@ -16,8 +16,6 @@ public class NewListJson extends JsonPacket {
 
     public static NewListJson newListJson;
 
-    public List<NewModle> newModles;
-
     public NewListJson(Context context) {
         super(context);
     }
@@ -30,10 +28,12 @@ public class NewListJson extends JsonPacket {
     }
 
     public List<NewModle> readJsonNewModles(String res, String value) {
-        newModles = new ArrayList<NewModle>();
+
+        List<NewModle> newModles = new ArrayList<NewModle>();
+
         try {
             if (res == null || res.equals("")) {
-                return null;
+                return newModles;
             }
             NewModle newModle = null;
             JSONObject jsonObject = new JSONObject(res);
