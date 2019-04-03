@@ -1,3 +1,7 @@
+move the project to AS.
+
+
+
 QuickNews
 =========
 This is a news client, similar to netease, news headlines
