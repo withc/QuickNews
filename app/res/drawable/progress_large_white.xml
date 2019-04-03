@@ -6,6 +6,6 @@
         android:duration="1000"  
         android:repeatCount="-1"  
         android:startOffset="100"
-         android:interpolator="@android:anim/accelerate_interpolator"
+        android:interpolator="@android:anim/accelerate_interpolator"
         android:pivotX="50%"  
         android:pivotY="50%" />

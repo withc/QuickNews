@@ -27,32 +27,17 @@ public class HttpUtil {
 
     public  static final OkHttpClient mOkHttpClient = new OkHttpClient();
 
-    public static String postByHttpURLConnection(String strUrl,
-            NameValuePair... nameValuePairs) {
-        return CustomHttpURLConnection.PostFromWebByHttpURLConnection(strUrl,
-                nameValuePairs);
-    }
 
-    public static String getByHttpURLConnection(String strUrl,
-            NameValuePair... nameValuePairs) {
-        return CustomHttpURLConnection.GetFromWebByHttpUrlConnection(strUrl,
-                nameValuePairs);
-    }
-
-    public static String postByHttpClient(Context context, String strUrl,
-            NameValuePair... nameValuePairs) throws Exception {
-        String result = CustomHttpClient.PostFromWebByHttpClient(context, strUrl, nameValuePairs);
+    public static String postByHttpClient(Context context, String strUrl ) throws Exception {
+        String result = "";
         return result;
     }
 
-    public static String getByHttpClient(Context context, String strUrl,
-            NameValuePair... nameValuePairs) throws Exception {
+    public static String getByHttpClient(Context context, String strUrl ) throws Exception {
 
         mOkHttpClient.setConnectTimeout(1000, TimeUnit.MINUTES);
         mOkHttpClient.setReadTimeout(1000, TimeUnit.MINUTES);
-        Request request = new Request.Builder()
-                .url(strUrl)
-                .build();
+        Request request = new Request.Builder().url(strUrl).build();
         Response response = mOkHttpClient.newCall(request).execute();
 
         String result = "";

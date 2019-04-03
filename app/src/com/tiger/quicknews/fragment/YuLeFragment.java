@@ -188,7 +188,7 @@ public class YuLeFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     void loadNewList(String url) {
         String result;
         try {
-            result = HttpUtil.getByHttpClient(getActivity(), url, null);
+            result = HttpUtil.getByHttpClient(getActivity(), url);
             getResult(result);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,8 +1,42 @@
 
 package com.tiger.quicknews.http;
 
+import com.tiger.quicknews.utils.StringUtils;
+
+import java.util.HashMap;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+import org.jsoup.nodes.Element;
+import java.io.IOException;
+
 public class Url {
+
     public static final String host = "http://c.m.163.com/";
+    public static HashMap<String, String> channelMap = new HashMap<>();
+
+    public static void loadChannel()
+    {
+        channelMap.clear();
+        try {
+            Document doc = Jsoup.connect(host).get();
+
+            Elements links = doc.getElementsByTag("a");
+
+            for(Element link : links)
+            {
+                String title = link.getElementsByTag("a").text();
+
+                String href   = link.select("a").attr("href");
+                channelMap.put( title, href);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //======================================================
+
     public static final String endUrl = "-20.html";
     public static final String endDetailUrl = "/full.html";
     // 头条

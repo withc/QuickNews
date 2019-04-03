@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity {
     private int columnSelectIndex = 0;
     private ArrayList<Fragment> fragments;
 
-    private Fragment newfragment;
+    private BaseFragment newfragment;
     private double back_pressed;
 
     public static boolean isChange = false;
@@ -242,7 +242,8 @@ public class MainActivity extends BaseActivity {
 
     public Fragment initFragment(String channelName) {
         if (channelName.equals("头条")) {
-            newfragment = new NewsFragment_();
+            newfragment = new CommonFragmentImp_();
+            newfragment.setChannelName(channelName);
         } else if (channelName.equals("足球")) {
             newfragment = new FoodBallFragment_();
         } else if (channelName.equals("娱乐")) {
@@ -410,4 +411,6 @@ public class MainActivity extends BaseActivity {
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
+
 }

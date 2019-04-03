@@ -15,8 +15,14 @@ public class BaseFragment extends Fragment {
      */
     public int currentPagte = 1;
 
+    public String channelName;
+
     public BaseActivity getMyActivity() {
         return (BaseActivity) getActivity();
+    }
+
+    public void setChannelName(String name) {
+        this.channelName = name;
     }
 
     public String getNewUrl(String index) {

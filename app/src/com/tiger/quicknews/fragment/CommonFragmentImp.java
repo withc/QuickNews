@@ -1,4 +1,3 @@
-
 package com.tiger.quicknews.fragment;
 
 import android.app.Activity;
@@ -7,12 +6,13 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 
 import com.nhaarman.listviewanimations.swinginadapters.AnimationAdapter;
 import com.tiger.quicknews.R;
-import com.tiger.quicknews.activity.*;
+import com.tiger.quicknews.activity.BaseActivity;
+import com.tiger.quicknews.activity.DetailsActivity_;
+import com.tiger.quicknews.activity.ImageDetailActivity_;
 import com.tiger.quicknews.adapter.CardsAnimationAdapter;
 import com.tiger.quicknews.adapter.NewAdapter;
 import com.tiger.quicknews.bean.NewModle;
@@ -25,7 +25,6 @@ import com.tiger.quicknews.wedget.swiptlistview.SwipeListView;
 import com.tiger.quicknews.wedget.viewimage.Animations.DescriptionAnimation;
 import com.tiger.quicknews.wedget.viewimage.Animations.SliderLayout;
 import com.tiger.quicknews.wedget.viewimage.SliderTypes.BaseSliderView;
-import com.tiger.quicknews.wedget.viewimage.SliderTypes.BaseSliderView.OnSliderClickListener;
 import com.tiger.quicknews.wedget.viewimage.SliderTypes.TextSliderView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -43,8 +42,9 @@ import java.util.HashMap;
 import java.util.List;
 
 @EFragment(R.layout.activity_main)
-public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
-        OnSliderClickListener {
+public class CommonFragmentImp extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener,
+        BaseSliderView.OnSliderClickListener {
+
     protected SliderLayout mDemoSlider;
     @ViewById(R.id.swipe_container)
     protected SwipeRefreshLayout swipeLayout;
@@ -52,8 +52,8 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
     protected SwipeListView mListView;
     @ViewById(R.id.progressBar)
     protected ProgressBar mProgressBar;
-    protected HashMap<String, String> url_maps;
 
+    protected HashMap<String, String> url_maps;
     protected HashMap<String, NewModle> newHashMap;
 
     @Bean
@@ -69,6 +69,7 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     @AfterInject
     protected void init() {
+
         listsModles = new ArrayList<NewModle>();
         url_maps = new HashMap<String, String>();
 
@@ -77,7 +78,6 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     @AfterViews
     protected void initView() {
-
         swipeLayout.setOnRefreshListener(this);
         InitView.instance().initSwipeRefreshLayout(swipeLayout);
         InitView.instance().initListView(mListView, getActivity());
@@ -87,14 +87,14 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
         AnimationAdapter animationAdapter = new CardsAnimationAdapter(newAdapter);
         animationAdapter.setAbsListView(mListView);
         mListView.setAdapter(animationAdapter);
-        loadData(getCommonUrl(index + "", Url.YouXiId));
+        loadData(getNewUrl(index + ""));
 
-        mListView.setOnBottomListener(new OnClickListener() {
+        mListView.setOnBottomListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentPagte++;
                 index = index + 20;
-                loadData(getCommonUrl(index + "", Url.YouXiId));
+                loadData(getNewUrl(index + ""));
             }
         });
     }
@@ -106,7 +106,7 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
             mListView.onBottomComplete();
             mProgressBar.setVisibility(View.GONE);
             getMyActivity().showShortToast(getString(R.string.not_network));
-            String result = getMyActivity().getCacheStr("YouXiFragment" + currentPagte);
+            String result = getMyActivity().getCacheStr("NewsFragment" + currentPagte);
             if (!StringUtils.isEmpty(result)) {
                 getResult(result);
             }
@@ -158,7 +158,7 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
             public void run() {
                 currentPagte = 1;
                 isRefresh = true;
-                loadData(getCommonUrl(0 + "", Url.YouXiId));
+                loadData(getNewUrl("0"));
                 url_maps.clear();
                 mDemoSlider.removeAllSliders();
             }
@@ -174,7 +174,7 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void enterDetailActivity(NewModle newModle) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("newModle", newModle);
-        Class class1;
+        Class<?> class1;
         if (newModle.getImagesModle() != null && newModle.getImagesModle().getImgList().size() > 1) {
             class1 = ImageDetailActivity_.class;
         } else {
@@ -182,6 +182,9 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
         }
         ((BaseActivity) getActivity()).openActivity(class1,
                 bundle, 0);
+        // Intent intent = new Intent(getActivity(), class1);
+        // intent.putExtras(bundle);
+        // IntentUtils.startPreviewActivity(getActivity(), intent);
     }
 
     @Background
@@ -189,7 +192,11 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
         String result;
         try {
             result = HttpUtil.getByHttpClient(getActivity(), url);
-            getResult(result);
+            if (!StringUtils.isEmpty(result)) {
+                getResult(result);
+            } else {
+                swipeLayout.setRefreshing(false);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -197,7 +204,7 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     @UiThread
     public void getResult(String result) {
-        getMyActivity().setCacheStr("YouXiFragment" + currentPagte, result);
+        getMyActivity().setCacheStr("NewsFragment" + currentPagte, result);
         if (isRefresh) {
             isRefresh = false;
             newAdapter.clear();
@@ -205,9 +212,9 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
         }
         mProgressBar.setVisibility(View.GONE);
         swipeLayout.setRefreshing(false);
-
-        List<NewModle> list = NewListJson.instance(getActivity()).readJsonNewModles(result,
-                Url.YouXiId);
+        List<NewModle> list =
+                NewListJson.instance(getActivity()).readJsonNewModles(result,
+                        Url.TopId);
         if (index == 0 && list.size() >= 4) {
             initSliderLayout(list);
         } else {
@@ -235,3 +242,4 @@ public class YouXiFragment extends BaseFragment implements SwipeRefreshLayout.On
         MobclickAgent.onPageEnd("MainScreen");
     }
 }
+

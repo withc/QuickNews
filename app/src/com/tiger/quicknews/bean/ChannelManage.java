@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.tiger.quicknews.dao.ChannelDao;
 import com.tiger.quicknews.db.SQLHelper;
+import com.tiger.quicknews.http.Url;
 
 import java.util.ArrayList;
 import java.util.List;

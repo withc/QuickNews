@@ -40,7 +40,7 @@ public class ChannelDao implements ChannelDaoInface {
                 String mName = method.getName();
                 if (mName.startsWith("get") && !mName.startsWith("getClass")) {
                     String fieldName = mName.substring(3, mName.length()).toLowerCase();
-                    Object value = method.invoke(item, null);
+                    Object value = method.invoke(item);
                     if (value instanceof String) {
                         values.put(fieldName, (String) value);
                     }
@@ -64,33 +64,6 @@ public class ChannelDao implements ChannelDaoInface {
         }
         return flag;
     }
-
-    // @Override
-    // public boolean addCache(ChannelItem item) {
-    // boolean flag = false;
-    // SQLiteDatabase database = null;
-    // long id = -1;
-    // try {
-    // database = helper.getWritableDatabase();
-    // database.beginTransaction();
-    // ContentValues values = new ContentValues();
-    // values.put("name", item.getName());
-    // values.put("id", item.getId());
-    // values.put("orderId", item.getOrderId());
-    // values.put("selected", item.getSelected());
-    // id = database.insert(SQLHelper.TABLE_CHANNEL, null, values);
-    // flag = (id != -1 ? true : false);
-    // database.setTransactionSuccessful();
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // } finally {
-    // if (database != null) {
-    // database.endTransaction();
-    // database.close();
-    // }
-    // }
-    // return flag;
-    // }
 
     @Override
     public boolean deleteCache(String whereClause, String[] whereArgs) {

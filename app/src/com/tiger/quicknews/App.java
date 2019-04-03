@@ -16,6 +16,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.tiger.quicknews.db.SQLHelper;
+import com.tiger.quicknews.http.Url;
+import android.os.AsyncTask;
 
 import org.androidannotations.annotations.EApplication;
 
@@ -30,6 +32,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mAppApplication = this;
+        initChannel();
         initImageLoader(getApplicationContext());
     }
 
@@ -53,6 +56,24 @@ public class App extends Application {
         // 整体摧毁的时候调用这个方法
     }
 
+    public static void initChannel()
+    {
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(final String... name)
+            {
+                Url.loadChannel();
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String str)
+            {
+
+            }
+        }.execute();
+
+    }
     /** 初始化ImageLoader */
     public static void initImageLoader(Context context) {
         String filePath = Environment.getExternalStorageDirectory() +
